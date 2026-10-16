@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Basic HTML Forms | Assignment 4</title>
+        <link rel="stylesheet" href="style.css">
+    </head>
+    <body>
+        <main class="page container">
+            <header class="page-header">
+                <h1>Forms and validation</h1>
+                <nav aria-label="Pages">
+                    <a href="basic-form.html">Basic forms</a>
+                    <a href="bootstrap-form.html">Bootstrap forms</a>
+                    <a href="registration.html">Registration</a>
+                </nav>
+            </header>
+            <section class="form-section" id="task0">
+                <h2>Task 0. Contact form</h2>
+                <form data-basic="true">
+                    <div class="form-group">
+                        <label for="name0">Name</label>
+                        <input type="text" id="name0" name="name">
+                    </div>
+                    <div class="form-group">
+                        <label for="email0">Email</label>
+                        <input type="email" id="email0" name="email" autocomplete="email">
+                    </div>
+                    <div class="form-group">
+                        <label for="message0">Message</label>
+                        <textarea id="message0" name="message" rows="4"></textarea>
+                    </div>
+                    <div class="button-group">
+                        <button type="submit">Send Message</button>
+                    </div>
+                    <div class="col-12 form-status" role="status" hidden>Form submitted.</div>
+                </form>
+            </section>
+
+            <section class="form-section" id="task1">
+                <h2>Task 1. HTML5 validation</h2>
+                <form data-basic="true">
+                    <div class="form-group">
+                        <label for="name1">Name</label>
+                        <input type="text" id="name1" name="name" required minlength="2" maxlength="30">
+                    </div>
+                    <div class="form-group">
+                        <label for="email1">Email</label>
+                        <input type="email" id="email1" name="email" required autocomplete="email">
+                    </div>
+                    <div class="form-group">
+                        <label for="message1">Message</label>
+                        <textarea id="message1" name="message" rows="4" required minlength="10" maxlength="500"></textarea>
+                    </div>
+                    <div class="button-group">
+                        <button type="submit">Send Message</button>
+                    </div>
+                    <div class="col-12 form-status" role="status" hidden>Form validated successfully!</div>
+                </form>
+            </section>
+        </main>
+        <script src="script.js"></script>
+    </body>
+</html>

@@ -1,0 +1,728 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Assignment 4 | Forms and Validation</title>
+        <style>
+.row {
+    display: flex;
+    flex-wrap: wrap;
+    margin: -8px;
+}
+
+.row>* {
+    padding: 8px;
+    width: 100%;
+    flex-shrink: 0;
+}
+
+.col-12 {
+    width: 100%;
+}
+
+.g-3 {
+    margin: -8px;
+}
+
+.form-text {
+    font-size: 12px;
+    color: #64748b;
+    margin-top: 5px;
+}
+
+.text-end {
+    text-align: right;
+}
+
+.btn {
+    display: inline-block;
+    padding: 11px 26px;
+    cursor: pointer;
+    border-radius: 8px;
+}
+
+.btn-outline-secondary {
+    border: 1px solid #adb5bd;
+    background: white;
+    color: #334155;
+}
+
+.d-flex {
+    display: flex;
+}
+
+.justify-content-end {
+    justify-content: flex-end;
+}
+
+.gap-2 {
+    gap: 8px;
+}
+
+.form-control,.form-select {
+    display: block;
+    width: 100%;
+    background: white;
+}
+
+.form-check {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    margin: 8px 0;
+}
+
+.form-check-input {
+    width: 16px;
+    height: 16px;
+}
+
+.fs-6 {
+    font-size: 16px;
+}
+
+.valid-feedback,.invalid-feedback {
+    display: none;
+    font-size: 13px;
+    margin-top: 5px;
+}
+
+.is-valid {
+    border-color: #198754!important;
+}
+
+.is-invalid {
+    border-color: #dc3545!important;
+}
+
+.is-valid~.valid-feedback {
+    display: block;
+    color: #198754;
+}
+
+.is-invalid~.invalid-feedback {
+    display: block;
+    color: #dc3545;
+}
+
+.d-none {
+    display: none!important;
+}
+
+.alert {
+    padding: 12px;
+}
+
+.alert-success {
+    background: #d1e7dd;
+    color: #0f5132;
+}
+
+.mt-3 {
+    margin-top: 16px;
+}
+
+.text-danger {
+    color: #dc3545;
+}
+
+.mx-auto {
+    margin-left: auto;
+    margin-right: auto;
+}
+
+@media(min-width: 768px) {
+    .col-md-6 {
+        width: 50%;
+    }
+
+}
+
+        </style>
+        <style>
+* {
+    box-sizing: border-box;
+}
+
+body {
+    margin: 0;
+    background: #f3f3f1;
+    color: #292d2b;
+    font-family: Arial, sans-serif;
+    font-size: 15px;
+    line-height: 1.5;
+}
+
+.page.container {
+    width: 100%;
+    max-width: 820px;
+    margin: 0 auto;
+    padding: 38px 24px 56px;
+}
+
+.page-header {
+    margin-bottom: 30px;
+}
+
+h1 {
+    margin: 0 0 18px;
+    font-size: 27px;
+    line-height: 1.25;
+    font-weight: 600;
+    color: #292d2b;
+}
+
+nav {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 12px 26px;
+    padding-bottom: 18px;
+    border-bottom: 1px solid #d6d8d4;
+}
+
+nav a {
+    color: #476552;
+    font-size: 14px;
+    text-decoration: underline;
+    text-underline-offset: 3px;
+}
+
+nav a:hover {
+    color: #233f2d;
+}
+
+.form-section {
+    margin-bottom: 32px;
+    padding: 28px 32px 32px;
+    border: 1px solid #d6d8d4;
+    border-radius: 5px;
+    background: #fff;
+    scroll-margin-top: 24px;
+}
+
+h2 {
+    margin: 0 0 26px;
+    color: #292d2b;
+    font-size: 21px;
+    line-height: 1.35;
+    font-weight: 600;
+}
+
+.form-group {
+    margin-bottom: 20px;
+}
+
+.form-group label,
+.form-label {
+    display: block;
+    margin: 0 0 7px;
+    color: #333a35;
+    font-size: 14px;
+    line-height: 1.5;
+    font-weight: 600;
+}
+
+.form-group input,
+.form-group textarea,
+.form-control,
+.form-select {
+    display: block;
+    width: 100%;
+    min-height: 43px;
+    padding: 9px 11px;
+    border: 1px solid #bfc5c0;
+    border-radius: 4px;
+    background-color: #fff;
+    color: #292d2b;
+    font: inherit;
+    line-height: 1.5;
+}
+
+.form-group input:focus,
+.form-group textarea:focus,
+.form-control:focus,
+.form-select:focus {
+    outline: 0;
+    border-color: #4d795b;
+    box-shadow: 0 0 0 2px #4d795b24;
+}
+
+textarea {
+    resize: vertical;
+    min-height: 110px;
+}
+
+.row.g-3 {
+    display: flex;
+    flex-wrap: wrap;
+    margin: -10px;
+}
+
+.row.g-3 > * {
+    padding: 10px;
+    margin-top: 0;
+}
+
+.button-group {
+    text-align: right;
+    padding-top: 2px;
+}
+
+.button-group button,
+.btn {
+    display: inline-block;
+    padding: 10px 20px;
+    border: 1px solid transparent;
+    border-radius: 4px;
+    font: inherit;
+    font-size: 14px;
+    line-height: 1.5;
+    cursor: pointer;
+}
+
+.button-group button,
+.btn-primary {
+    background: #456b50;
+    border-color: #456b50;
+    color: #fff;
+}
+
+.button-group button:hover,
+.btn-primary:hover {
+    background: #34543e;
+    border-color: #34543e;
+    color: #fff;
+}
+
+.btn-outline-secondary {
+    background: #fff;
+    border-color: #bfc5c0;
+    color: #4b534e;
+}
+
+.btn-outline-secondary:hover {
+    background: #f2f4f1;
+    border-color: #a7afa9;
+    color: #292d2b;
+}
+
+button:focus-visible,
+a:focus-visible {
+    outline: 2px solid #456b50;
+    outline-offset: 3px;
+}
+
+fieldset {
+    min-width: 0;
+    border: 0;
+}
+
+legend.form-label {
+    float: none;
+    width: auto;
+    font-size: 14px !important;
+}
+
+.form-check {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding-left: 0;
+    margin: 8px 0;
+    font-size: 14px;
+}
+
+.form-check .form-check-input {
+    float: none;
+    flex-shrink: 0;
+    width: 16px;
+    height: 16px;
+    margin: 0;
+    accent-color: #456b50;
+}
+
+.form-check-input:checked {
+    background-color: #456b50;
+    border-color: #456b50;
+}
+
+.valid-feedback,
+.invalid-feedback,
+.small-note {
+    margin-top: 5px;
+    font-size: 12px;
+    line-height: 1.5;
+}
+
+.form-status,
+.alert-success {
+    margin-top: 18px;
+    padding: 11px 13px;
+    border: 1px solid #ccdccc;
+    border-radius: 4px;
+    background: #f1f7ef;
+    color: #34583b;
+    font-size: 14px;
+}
+
+[hidden] {
+    display: none !important;
+}
+
+@media (max-width: 767px) {
+    .page.container {
+        padding: 25px 16px 32px;
+    }
+
+    .form-section {
+        padding: 23px 20px;
+    }
+
+    h1 {
+        font-size: 25px;
+    }
+
+    h2 {
+        font-size: 20px;
+    }
+
+    .row.g-3 > * {
+        width: 100%;
+    }
+}
+
+        </style>
+    </head>
+    <body>
+        <main class="page container">
+            <header class="page-header">
+                <h1>Assignment 4. Forms and validation</h1>
+                <nav aria-label="Tasks">
+                    <a href="#task0">Task 0</a>
+                    <a href="#task1">Task 1</a>
+                    <a href="#task2">Task 2</a>
+                    <a href="#task3">Task 3</a>
+                    <a href="#task4">Task 4</a>
+                </nav>
+            </header>
+            <section class="form-section" id="task0">
+                <h2>Task 0. Contact form</h2>
+                <form data-basic="true">
+                    <div class="form-group">
+                        <label for="name0">Name</label>
+                        <input type="text" id="name0" name="name">
+                    </div>
+                    <div class="form-group">
+                        <label for="email0">Email</label>
+                        <input type="email" id="email0" name="email" autocomplete="email">
+                    </div>
+                    <div class="form-group">
+                        <label for="message0">Message</label>
+                        <textarea id="message0" name="message" rows="4"></textarea>
+                    </div>
+                    <div class="button-group">
+                        <button type="submit">Send Message</button>
+                    </div>
+                    <div class="col-12 form-status" role="status" hidden>Form submitted.</div>
+                </form>
+            </section>
+
+            <section class="form-section" id="task1">
+                <h2>Task 1. HTML5 validation</h2>
+                <form data-basic="true">
+                    <div class="form-group">
+                        <label for="name1">Name</label>
+                        <input type="text" id="name1" name="name" required minlength="2" maxlength="30">
+                    </div>
+                    <div class="form-group">
+                        <label for="email1">Email</label>
+                        <input type="email" id="email1" name="email" required autocomplete="email">
+                    </div>
+                    <div class="form-group">
+                        <label for="message1">Message</label>
+                        <textarea id="message1" name="message" rows="4" required minlength="10" maxlength="500"></textarea>
+                    </div>
+                    <div class="button-group">
+                        <button type="submit">Send Message</button>
+                    </div>
+                    <div class="col-12 form-status" role="status" hidden>Form validated successfully!</div>
+                </form>
+            </section>
+
+            <section class="form-section" id="task2">
+                <h2>Task 2. Bootstrap contact form</h2>
+                <form class="row g-3" data-basic="true">
+                    <div class="col-md-6">
+                        <label for="name2" class="form-label">Name</label>
+                        <input class="form-control" type="text" id="name2" name="name" required>
+                    </div>
+                    <div class="col-md-6">
+                        <label for="email2" class="form-label">Email</label>
+                        <input class="form-control" type="email" id="email2" name="email" required autocomplete="email">
+                    </div>
+                    <div class="col-12">
+                        <label for="message2" class="form-label">Message</label>
+                        <textarea class="form-control" id="message2" name="message" rows="4" required></textarea>
+                    </div>
+                    <div class="col-12 text-end">
+                        <button class="btn btn-primary" type="submit">Send Message</button>
+                    </div>
+                    <div class="col-12 form-status" role="status" hidden>Form validated successfully!</div>
+                </form>
+            </section>
+
+            <section class="form-section" id="task3">
+                <h2>Task 3. Form validation</h2>
+                <form class="row g-3" id="contactForm" novalidate>
+                    <div class="col-md-6">
+                        <label for="name3" class="form-label">Name</label>
+                        <input class="form-control" type="text" id="name3" name="name" required minlength="2" aria-describedby="name3-error">
+                        <div class="valid-feedback">Looks good!</div>
+                        <div class="invalid-feedback" id="name3-error">Please enter at least 2 characters.</div>
+                    </div>
+                    <div class="col-md-6">
+                        <label for="email3" class="form-label">Email</label>
+                        <input class="form-control" type="email" id="email3" name="email" required autocomplete="email" aria-describedby="email3-error">
+                        <div class="valid-feedback">Looks good!</div>
+                        <div class="invalid-feedback" id="email3-error">Email is required. Enter a valid email.</div>
+                    </div>
+                    <div class="col-12">
+                        <label for="message3" class="form-label">Message</label>
+                        <textarea class="form-control" id="message3" name="message" rows="4" minlength="10" required aria-describedby="message3-error"></textarea>
+                        <div class="valid-feedback">Looks good!</div>
+                        <div class="invalid-feedback" id="message3-error">Please enter at least 10 characters.</div>
+                    </div>
+                    <div class="col-12 text-end">
+                        <button class="btn btn-primary" type="submit">Send Message</button>
+                    </div>
+                </form>
+                <div id="contactSuccess" class="alert alert-success mt-3 d-none" role="status">Form validated successfully!</div>
+            </section>
+
+            <section class="form-section" id="task4">
+                <h2>Task 4. Registration form</h2>
+                <form class="row g-3" id="registrationForm" novalidate>
+                    <div class="col-md-6">
+                        <label for="firstName" class="form-label">First Name</label>
+                        <input class="form-control" type="text" id="firstName" name="firstName" minlength="2" maxlength="40" required aria-describedby="firstName-error">
+                        <div class="valid-feedback">Looks good!</div>
+                        <div class="invalid-feedback" id="firstName-error">Enter at least 2 characters.</div>
+                    </div>
+                    <div class="col-md-6">
+                        <label for="lastName" class="form-label">Last Name</label>
+                        <input class="form-control" type="text" id="lastName" name="lastName" minlength="2" maxlength="40" required aria-describedby="lastName-error">
+                        <div class="valid-feedback">Looks good!</div>
+                        <div class="invalid-feedback" id="lastName-error">Enter at least 2 characters.</div>
+                    </div>
+                    <div class="col-12">
+                        <label for="regEmail" class="form-label">Email</label>
+                        <input class="form-control" type="email" id="regEmail" name="email" required autocomplete="email" aria-describedby="regEmail-error">
+                        <div class="valid-feedback">Looks good!</div>
+                        <div class="invalid-feedback" id="regEmail-error">Enter a valid email address.</div>
+                    </div>
+                    <div class="col-md-6">
+                        <label for="password" class="form-label">Password</label>
+                        <input class="form-control" type="password" id="password" name="password" minlength="8" required autocomplete="new-password" aria-describedby="password-error">
+                        <div class="valid-feedback">Looks good!</div>
+                        <div class="invalid-feedback" id="password-error">Password must have at least 8 characters.</div>
+                    </div>
+                    <div class="col-md-6">
+                        <label for="confirmPassword" class="form-label">Confirm Password</label>
+                        <input class="form-control" type="password" id="confirmPassword" name="confirmPassword" minlength="8" required autocomplete="new-password" aria-describedby="confirmPassword-error">
+                        <div class="valid-feedback">Passwords match!</div>
+                        <div class="invalid-feedback" id="confirmPassword-error">Passwords must match.</div>
+                    </div>
+                    <fieldset class="col-md-6">
+                        <legend class="form-label fs-6">Gender</legend>
+                        <div class="form-check">
+                            <input class="form-check-input" type="radio" id="genderFemale" name="gender" value="female" required>
+                            <label class="form-check-label" for="genderFemale">Female</label>
+                        </div>
+                        <div class="form-check">
+                            <input class="form-check-input" type="radio" id="genderMale" name="gender" value="male" required>
+                            <label class="form-check-label" for="genderMale">Male</label>
+                        </div>
+                        <div id="genderFeedback" class="small-note text-danger d-none">Please select a gender.</div>
+                    </fieldset>
+                    <fieldset class="col-md-6">
+                        <legend class="form-label fs-6">Hobbies</legend>
+                        <div class="form-check">
+                            <input class="form-check-input" type="checkbox" id="hobbyReading" name="hobbies" value="reading">
+                            <label class="form-check-label" for="hobbyReading">Reading</label>
+                        </div>
+                        <div class="form-check">
+                            <input class="form-check-input" type="checkbox" id="hobbySports" name="hobbies" value="sports">
+                            <label class="form-check-label" for="hobbySports">Sports</label>
+                        </div>
+                        <div class="form-check">
+                            <input class="form-check-input" type="checkbox" id="hobbyCoding" name="hobbies" value="coding">
+                            <label class="form-check-label" for="hobbyCoding">Coding</label>
+                        </div>
+                    </fieldset>
+                    <div class="col-12">
+                        <label for="country" class="form-label">Country</label>
+                        <select class="form-select" id="country" name="country" required aria-describedby="country-error">
+                            <option value="">Choose your country</option>
+                            <option value="Kazakhstan">Kazakhstan</option>
+                            <option value="Kyrgyzstan">Kyrgyzstan</option>
+                            <option value="Uzbekistan">Uzbekistan</option>
+                            <option value="Other">Other</option>
+                        </select>
+                        <div class="valid-feedback">Looks good!</div>
+                        <div class="invalid-feedback" id="country-error">Please select a country.</div>
+                    </div>
+                    <div class="col-12 d-flex justify-content-end gap-2">
+                        <button class="btn btn-outline-secondary" type="reset">Reset</button>
+                        <button class="btn btn-primary" type="submit">Register</button>
+                    </div>
+                </form>
+                <div id="registrationSuccess" class="alert alert-success mt-3 d-none" role="status">Registration form validated successfully!</div>
+            </section>
+        </main>
+        <script>
+document.querySelectorAll('form[data-basic]').forEach(form => {
+    const status = form.querySelector('[role="status"]');
+
+    form.addEventListener('submit', event => {
+        event.preventDefault();
+        status.hidden = false;
+    });
+
+    form.addEventListener('input', () => {
+        status.hidden = true;
+    });
+});
+
+function attachValidation(formId, successId) {
+    const form = document.getElementById(formId);
+
+    if (!form) {
+        return;
+    }
+
+    const success = document.getElementById(successId);
+    const fields = [...form.querySelectorAll('input:not([type="radio"]):not([type="checkbox"]), textarea, select')];
+    const genderFeedback = document.getElementById('genderFeedback');
+    const touched = new Set();
+    let submitted = false;
+
+    function validateInput(field) {
+        field.setCustomValidity('');
+
+        if (field.required && !field.value.trim()) {
+            field.setCustomValidity('This field is required.');
+        } else if (field.minLength > 0 && field.value.length < field.minLength) {
+            field.setCustomValidity(`Enter at least ${field.minLength} characters.`);
+        }
+
+        if (field.id === 'confirmPassword') {
+            const password = document.getElementById('password');
+
+            if (field.value !== password.value) {
+                field.setCustomValidity('Passwords must match.');
+            }
+        }
+
+        const valid = field.checkValidity();
+        field.classList.toggle('is-valid', valid);
+        field.classList.toggle('is-invalid', !valid);
+        field.setAttribute('aria-invalid', String(!valid));
+
+        if (field.id === 'email3') {
+            document.getElementById('email3-error').textContent = field.value.trim()
+                ? 'Enter a valid email address.'
+                : 'Email is required';
+        }
+
+        return valid;
+    }
+
+    function validateGender() {
+        if (!genderFeedback) {
+            return true;
+        }
+
+        const valid = Boolean(form.querySelector('input[name="gender"]:checked'));
+        genderFeedback.classList.toggle('d-none', valid);
+
+        form.querySelectorAll('input[name="gender"]').forEach(field => {
+            field.setAttribute('aria-invalid', String(!valid));
+            field.setAttribute('aria-describedby', 'genderFeedback');
+        });
+
+        return valid;
+    }
+
+    fields.forEach(field => {
+        field.addEventListener('blur', () => {
+            touched.add(field);
+            validateInput(field);
+        });
+
+        ['input', 'change'].forEach(eventName => {
+            field.addEventListener(eventName, () => {
+                success.classList.add('d-none');
+
+                if (submitted || touched.has(field) || eventName === 'change') {
+                    touched.add(field);
+                    validateInput(field);
+                }
+
+                if (field.id === 'password') {
+                    const confirm = document.getElementById('confirmPassword');
+
+                    if (submitted || touched.has(confirm)) {
+                        validateInput(confirm);
+                    }
+                }
+            });
+        });
+    });
+
+    form.addEventListener('input', () => {
+        success.classList.add('d-none');
+    });
+
+    form.querySelectorAll('input[name="gender"]').forEach(field => {
+        field.addEventListener('change', validateGender);
+    });
+
+    form.addEventListener('submit', event => {
+        event.preventDefault();
+        submitted = true;
+        fields.forEach(validateInput);
+        const genderValid = validateGender();
+        const valid = form.checkValidity() && genderValid;
+        success.classList.toggle('d-none', !valid);
+
+        if (!valid) {
+            form.querySelector(':invalid')?.focus();
+        }
+    });
+
+    form.addEventListener('reset', () => {
+        submitted = false;
+        touched.clear();
+        fields.forEach(field => {
+            field.setCustomValidity('');
+            field.classList.remove('is-valid', 'is-invalid');
+            field.removeAttribute('aria-invalid');
+        });
+        form.querySelectorAll('input[name="gender"]').forEach(field => {
+            field.removeAttribute('aria-invalid');
+        });
+        success.classList.add('d-none');
+
+        if (genderFeedback) {
+            genderFeedback.classList.add('d-none');
+        }
+    });
+}
+
+attachValidation('contactForm', 'contactSuccess');
+attachValidation('registrationForm', 'registrationSuccess');
+
+        </script>
+    </body>
+</html>
